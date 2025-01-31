@@ -93,7 +93,7 @@ monitor-vps/
 
 ### **Dashboard en ejecución**
 
-![Captura de pantalla del dashboard](https://github.com/joanmedina/monitor-vps/assets/dashboard.png)
+![Captura de pantalla del dashboard](https://github.com/joanmedina/monitor-vps/blob/main/assets/dashboard.png)
 
 ---
 
