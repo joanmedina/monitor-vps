@@ -102,6 +102,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Actualizar datos de red
                 document.getElementById('rxData').innerText = data.red.rx;
                 document.getElementById('txData').innerText = data.red.tx;
+                if (data.red.interface) {
+                    document.getElementById('netInterface').innerText = data.red.interface;
+                }
 
                 // Actualizar procesos principales
                 const processTable = document.getElementById('processTable');

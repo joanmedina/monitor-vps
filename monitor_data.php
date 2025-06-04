@@ -54,7 +54,7 @@ echo json_encode([
     'cpu' => obtenerUsoCPU(),
     'ram' => obtenerUsoRAM(),
     'disco' => obtenerUsoDisco(),
-    'red' => obtenerEstadisticasRed(),
+    'red' => obtenerEstadisticasRed($_GET['iface'] ?? null),
     'uptime' => obtenerUptime(),
     'processes' => obtenerProcesosActivos(),
     'users' => obtenerUsuariosConectados(),
