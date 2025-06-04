@@ -40,6 +40,8 @@ Este proyecto es un **dashboard de monitorización** que muestra en tiempo real 
 
 3. **Configura las credenciales** de acceso en el archivo `auth.php`.
 
+4. **Define los servicios a vigilar** editando `config.php`.
+
 ---
 
 ## 🔐 **Protección del dashboard**
@@ -60,6 +62,17 @@ if (!isset($_SERVER['PHP_AUTH_USER']) || !isset($_SERVER['PHP_AUTH_PW']) ||
     echo 'Acceso denegado. Debe autenticarse para continuar.';
     exit;
 }
+```
+
+## ⚙️ **Personalizar servicios a vigilar**
+
+Edita `config.php` para indicar los servicios que deseas monitorizar.
+
+```php
+<?php
+return [
+    'services' => ['apache2', 'mysql']
+];
 ```
 
 ---
