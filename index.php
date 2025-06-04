@@ -27,7 +27,7 @@ require_once 'auth.php';
                 <div class="card text-center shadow-sm border-0 bg-warning text-white">
                     <div class="card-body">
                         <h5 class="card-title">Uptime</h5>
-                        <h3 id="uptime" class="fw-bold">Cargando...</h2>
+                        <h3 id="uptime" class="fw-bold">Cargando...</h3>
                     </div>
                 </div>
             </div>
@@ -36,7 +36,7 @@ require_once 'auth.php';
                 <div class="card text-center shadow-sm border-0 bg-info text-white">
                     <div class="card-body">
                         <h5 class="card-title">Procesos Activos</h5>
-                        <h3 id="processCount" class="fw-bold">Cargando...</h2>
+                        <h3 id="processCount" class="fw-bold">Cargando...</h3>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@ require_once 'auth.php';
                 <div class="card text-center shadow-sm border-0 bg-danger text-white">
                     <div class="card-body">
                         <h5 class="card-title">Usuarios Conectados</h5>
-                        <h3 id="connectedUsers" class="fw-bold">Cargando...</h2>
+                        <h3 id="connectedUsers" class="fw-bold">Cargando...</h3>
                     </div>
                 </div>
             </div>
