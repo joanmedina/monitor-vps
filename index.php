@@ -129,7 +129,8 @@ require_once 'auth.php';
                     <div class="card-header bg-primary text-white">Red</div>
                     <div class="card-body">
                         <canvas id="networkChart"></canvas>
-                        <p class="mt-3"><strong>Datos Recibidos (RX):</strong> <span id="rxData">Cargando...</span></p>
+                        <p class="mt-3"><strong>Interfaz:</strong> <span id="netInterface">-</span></p>
+                        <p><strong>Datos Recibidos (RX):</strong> <span id="rxData">Cargando...</span></p>
                         <p><strong>Datos Enviados (TX):</strong> <span id="txData">Cargando...</span></p>
                     </div>
                 </div>

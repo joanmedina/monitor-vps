@@ -12,16 +12,13 @@ require_once 'metrics/connections.php';
 require_once 'metrics/ssl_certificates.php';
 require_once 'metrics/swap.php';
 
-
-
-
-
-
-
+// Configuración de la aplicación
+$config = require __DIR__ . '/config.php';
 
 // Obtener lista de servicios (Apache, MySQL, etc.)
 function obtenerServicios() {
-    $servicios = ['apache2', 'mysql'];
+    global $config;
+    $servicios = isset($config['services']) ? $config['services'] : [];
     $resultado = [];
 
     foreach ($servicios as $servicio) {
@@ -57,7 +54,7 @@ echo json_encode([
     'cpu' => obtenerUsoCPU(),
     'ram' => obtenerUsoRAM(),
     'disco' => obtenerUsoDisco(),
-    'red' => obtenerEstadisticasRed(),
+    'red' => obtenerEstadisticasRed($_GET['iface'] ?? null),
     'uptime' => obtenerUptime(),
     'processes' => obtenerProcesosActivos(),
     'users' => obtenerUsuariosConectados(),

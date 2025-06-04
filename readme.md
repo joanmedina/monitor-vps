@@ -40,6 +40,7 @@ Este proyecto es un **dashboard de monitorización** que muestra en tiempo real 
 2. **Copia el contenido del proyecto** al directorio donde estará alojado el dashboard.
 
 3. **Configura las credenciales** de acceso en el archivo `auth.php`.
+
 4. **Programa la recolección de métricas** ejecutando periódicamente `record_metrics.php` (por ejemplo, mediante `cron`). Este script guarda los datos en `data/metrics.sqlite`.
    Ejemplo de entrada en `crontab` para guardar datos cada 5 minutos:
    ```cron
@@ -50,22 +51,33 @@ Este proyecto es un **dashboard de monitorización** que muestra en tiempo real 
 
 ## 🔐 **Protección del dashboard**
 
-Este proyecto utiliza **autenticación HTTP básica** para proteger las métricas del servidor. Asegúrate de definir las credenciales en `auth.php`.
+Este proyecto utiliza **autenticación HTTP básica** para proteger las métricas del servidor. Las credenciales se establecen mediante variables de entorno definidas en el archivo `.env`.
 
-### **Ejemplo del archivo `auth.php`:**
+### **Ejemplo del archivo `.env`:**
+```env
+USUARIO_PERMITIDO=admin
+PASSWORD_PERMITIDA=<hash de la contraseña>
+```
+
+Para generar un hash compatible puedes ejecutar:
+```bash
+php generate_hash.php
+```
+
+O bien utilizar directamente PHP desde la consola:
+```bash
+php -r "echo password_hash('tu_password', PASSWORD_DEFAULT);"
+```
+
+## ⚙️ **Personalizar servicios a vigilar**
+
+Edita `config.php` para indicar los servicios que deseas monitorizar.
+
 ```php
 <?php
-$usuario_permitido = 'tusuario';
-$password_permitida = 'tupassword';
-
-if (!isset($_SERVER['PHP_AUTH_USER']) || !isset($_SERVER['PHP_AUTH_PW']) ||
-    $_SERVER['PHP_AUTH_USER'] !== $usuario_permitido || $_SERVER['PHP_AUTH_PW'] !== $password_permitida) {
-    
-    header('WWW-Authenticate: Basic realm="Dashboard de Monitorización"');
-    header('HTTP/1.0 401 Unauthorized');
-    echo 'Acceso denegado. Debe autenticarse para continuar.';
-    exit;
-}
+return [
+    'services' => ['apache2', 'mysql']
+];
 ```
 
 ---
