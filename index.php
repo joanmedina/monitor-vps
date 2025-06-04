@@ -15,11 +15,23 @@ require_once 'auth.php';
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
     <script src="assets/js/app.js" defer></script>
+    <script src="assets/js/history.js" defer></script>
 </head>
 <body class="bg-light">
 
     <div class="container py-5">
         <h1 class="text-center mb-5">Monitorización del Servidor VPS</h1>
+
+        <ul class="nav nav-tabs" id="mainTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="live-tab" data-bs-toggle="tab" data-bs-target="#live" type="button" role="tab">En Vivo</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="history-tab" data-bs-toggle="tab" data-bs-target="#history" type="button" role="tab">Histórico</button>
+            </li>
+        </ul>
+        <div class="tab-content pt-4" id="mainTabContent">
+            <div class="tab-pane fade show active" id="live" role="tabpanel">
 
         <!-- Indicadores Generales -->
         <div class="row row-cols-1 row-cols-md-3 g-3 mb-4">
@@ -195,6 +207,32 @@ require_once 'auth.php';
                 </div>
             </div>
         </div>
+            </div> <!-- cierre live tab -->
+            <div class="tab-pane fade" id="history" role="tabpanel">
+                <ul class="nav nav-pills mb-3" id="historyRange" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="day-tab" data-bs-toggle="pill" data-bs-target="#day" type="button" role="tab">Día</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="week-tab" data-bs-toggle="pill" data-bs-target="#week" type="button" role="tab">Semana</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="month-tab" data-bs-toggle="pill" data-bs-target="#month" type="button" role="tab">Mes</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="historyRangeContent">
+                    <div class="tab-pane fade show active" id="day" role="tabpanel">
+                        <canvas id="historyDay"></canvas>
+                    </div>
+                    <div class="tab-pane fade" id="week" role="tabpanel">
+                        <canvas id="historyWeek"></canvas>
+                    </div>
+                    <div class="tab-pane fade" id="month" role="tabpanel">
+                        <canvas id="historyMonth"></canvas>
+                    </div>
+                </div>
+            </div> <!-- cierre history tab -->
+        </div> <!-- cierre tab-content -->
     </div>
 
     <!-- Bootstrap JS -->

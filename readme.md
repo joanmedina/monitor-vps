@@ -7,6 +7,7 @@ Este proyecto es un **dashboard de monitorización** que muestra en tiempo real 
 ## 🚀 **Características**
 
 - **Gráficos en tiempo real** de CPU, RAM, Disco y Red utilizando `Chart.js`.
+- **Gráficos históricos** (día, semana, mes) usando los datos almacenados en SQLite.
 - **Métricas detalladas**, incluyendo:
   - Carga del sistema (1, 5, 15 minutos)
   - Uptime
@@ -39,6 +40,11 @@ Este proyecto es un **dashboard de monitorización** que muestra en tiempo real 
 2. **Copia el contenido del proyecto** al directorio donde estará alojado el dashboard.
 
 3. **Configura las credenciales** de acceso en el archivo `auth.php`.
+4. **Programa la recolección de métricas** ejecutando periódicamente `record_metrics.php` (por ejemplo, mediante `cron`). Este script guarda los datos en `data/metrics.sqlite`.
+   Ejemplo de entrada en `crontab` para guardar datos cada 5 minutos:
+   ```cron
+   */5 * * * * /usr/bin/php /ruta/al/proyecto/record_metrics.php
+   ```
 
 ---
 
@@ -75,6 +81,9 @@ monitor-vps/
 │   ├── js/
 │   │   └── app.js               # Lógica de actualización de métricas
 │
+├── data/
+│   └── metrics.sqlite          # Base de datos SQLite con el histórico
+│
 ├── metrics/
 │   ├── cpu.php                  # Métricas de CPU
 │   ├── memory.php               # Métricas de RAM
@@ -83,6 +92,8 @@ monitor-vps/
 │
 ├── index.php                    # Página principal del dashboard
 ├── monitor_data.php             # API de datos en formato JSON
+├── record_metrics.php           # Script para guardar métricas en SQLite
+├── historical_data.php          # API para consultar datos históricos
 ├── auth.php                     # Protección con autenticación HTTP
 ├── README.md                    # Documentación del proyecto
 ```
