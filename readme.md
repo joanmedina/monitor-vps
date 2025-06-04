@@ -38,28 +38,30 @@ Este proyecto es un **dashboard de monitorización** que muestra en tiempo real 
 
 2. **Copia el contenido del proyecto** al directorio donde estará alojado el dashboard.
 
-3. **Configura las credenciales** de acceso en el archivo `auth.php`.
+3. Ejecuta `composer install` para descargar las dependencias.
+
+4. **Crea un archivo `.env`** con las credenciales de acceso siguiendo el ejemplo de `.env.example`.
 
 ---
 
 ## 🔐 **Protección del dashboard**
 
-Este proyecto utiliza **autenticación HTTP básica** para proteger las métricas del servidor. Asegúrate de definir las credenciales en `auth.php`.
+Este proyecto utiliza **autenticación HTTP básica** para proteger las métricas del servidor. Las credenciales se establecen mediante variables de entorno definidas en el archivo `.env`.
 
-### **Ejemplo del archivo `auth.php`:**
-```php
-<?php
-$usuario_permitido = 'tusuario';
-$password_permitida = 'tupassword';
+### **Ejemplo del archivo `.env`:**
+```env
+USUARIO_PERMITIDO=admin
+PASSWORD_PERMITIDA=<hash de la contraseña>
+```
 
-if (!isset($_SERVER['PHP_AUTH_USER']) || !isset($_SERVER['PHP_AUTH_PW']) ||
-    $_SERVER['PHP_AUTH_USER'] !== $usuario_permitido || $_SERVER['PHP_AUTH_PW'] !== $password_permitida) {
-    
-    header('WWW-Authenticate: Basic realm="Dashboard de Monitorización"');
-    header('HTTP/1.0 401 Unauthorized');
-    echo 'Acceso denegado. Debe autenticarse para continuar.';
-    exit;
-}
+Para generar un hash compatible puedes ejecutar:
+```bash
+php generate_hash.php
+```
+
+O bien utilizar directamente PHP desde la consola:
+```bash
+php -r "echo password_hash('tu_password', PASSWORD_DEFAULT);"
 ```
 
 ---
