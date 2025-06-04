@@ -1,2 +1,4 @@
+# Ignore SQLite databases
+data/*.sqlite
 vendor/
 .env
