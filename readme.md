@@ -134,6 +134,14 @@ Asegúrate de que el usuario del servidor tenga permisos para ejecutar estos com
 
 ---
 
+## 🔒 **Seguridad y buenas prácticas**
+
+El panel requiere autenticación básica y todas las contraseñas se almacenan como *hashes* utilizando `password_hash`.
+No obstante, muchas métricas se obtienen mediante `shell_exec`. Ejecuta el servidor web con un usuario sin privilegios y limita el acceso al dashboard.
+Para evitar inyección de comandos, la captura del tráfico de red se implementa leyendo directamente `/proc/net/dev` en lugar de invocar comandos externos.
+
+---
+
 ## 🤝 **Contribuciones**
 
 ¡Las contribuciones son bienvenidas! Si tienes ideas para mejorar este dashboard o encuentras un problema, crea un **issue** o envía un **pull request**.

@@ -14,15 +14,24 @@ function obtenerEstadisticasRed($interfaces = null) {
         $interfaces = array_map('trim', explode(',', $interfaces));
     }
 
+    $datos = file('/proc/net/dev');
     $rxTotal = 0;
     $txTotal = 0;
+
     foreach ($interfaces as $iface) {
-        $line = shell_exec("cat /proc/net/dev | grep {$iface}:");
-        if ($line) {
-            $parts = preg_split('/\s+/', trim(str_replace(':', ' ', $line)));
-            if (isset($parts[1]) && isset($parts[9])) {
-                $rxTotal += (int)$parts[1];
-                $txTotal += (int)$parts[9];
+        // Validar que el nombre de la interfaz contenga solo caracteres seguros
+        if (!preg_match('/^[a-zA-Z0-9:_-]+$/', $iface)) {
+            continue;
+        }
+
+        foreach ($datos as $linea) {
+            if (strpos($linea, $iface . ':') !== false) {
+                $parts = preg_split('/\s+/', trim(str_replace(':', ' ', $linea)));
+                if (isset($parts[1]) && isset($parts[9])) {
+                    $rxTotal += (int)$parts[1];
+                    $txTotal += (int)$parts[9];
+                }
+                break;
             }
         }
     }
